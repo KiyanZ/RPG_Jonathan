@@ -2,9 +2,13 @@ package Character;
 
 import Character.Job.Job;
 import Character.Race.Race;
-import Character.Stat.*;
+import Character.Stat.Constitution;
+import Character.Stat.Dexterity;
+import Character.Stat.Intelligence;
+import Character.Stat.Strength;
+import Item.IConsumible;
 
-public class Character {
+public class Character implements IDamageable{
     private String name;
 
     public String getName() {
@@ -23,10 +27,11 @@ public class Character {
         return job;
     }
 
-    private Strength strength;
-    private Dexterity dexterity;
-    private Intelligence intelligence;
-    private Constitution constitution;
+    private double totalDmg = 0;
+    private  Strength strength;
+    private  Dexterity dexterity;
+    private  Intelligence intelligence;
+    private  Constitution constitution;
 
     public Character(String name, Race race, Job job) {
         this.name = name;
@@ -49,9 +54,31 @@ public class Character {
     public double magic() {
         return this.race.modifier(intelligence) + this.job.modifier(intelligence) * 2;
     }
-
-    public double health() {
+    //(Valor base Constitution + bonif. raza + bonif.profesion)*25
+    public double maxHealth() {
         return this.race.modifier(constitution) + this.job.modifier(constitution) * 25;
+    }
+    //Devuelve el valor de vida actual
+    public double health(){
+        return maxHealth() - totalDmg;
+    }
+    //Devuelve true si el daño es mayor o igual a la vida
+    public boolean isDead(){
+        return totalDmg >= health();
+    }
+    //Aumenta el daño recibido
+
+    public void receivesDamage(double amount){
+         totalDmg = totalDmg + amount;
+        System.out.println(name + " recieved " + amount + " damage. " + "Health: " + health() + "/" + maxHealth());
+    }
+    //Disminuye el daño recibido. El daño mínimo es 0
+    public void heals(double amount){
+        totalDmg = totalDmg - amount;
+        if (totalDmg < 0){
+            totalDmg = 0;
+        }
+        System.out.println(name + " healed " + amount + " damage. " + "Health: " + health() + "/" + maxHealth());
     }
 
     @Override
