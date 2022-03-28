@@ -8,7 +8,7 @@ import Character.Stat.Intelligence;
 import Character.Stat.Strength;
 import Item.IConsumible;
 
-public class Character implements IDamageable{
+public class Character implements IDamageable, IConsumible{
     private String name;
 
     public String getName() {
@@ -67,6 +67,11 @@ public class Character implements IDamageable{
         return totalDmg >= health();
     }
     //Aumenta el daño recibido
+
+    public void consumes(IConsumable consumable) {
+        consumable.consumedBy(this);
+        System.out.println(name + " consumed: " + consumable);
+    }
 
     public void receivesDamage(double amount){
          totalDmg = totalDmg + amount;
