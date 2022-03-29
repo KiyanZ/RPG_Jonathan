@@ -1,9 +1,9 @@
 package Item.Food;
 
-import Item.IConsumible;
+import Item.IConsumable;
 import Character.Character;
 
-public abstract class Food implements IConsumible {
+public abstract class Food implements IConsumable {
     private double power;
 
     @Override

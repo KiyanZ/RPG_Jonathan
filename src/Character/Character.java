@@ -6,9 +6,9 @@ import Character.Stat.Constitution;
 import Character.Stat.Dexterity;
 import Character.Stat.Intelligence;
 import Character.Stat.Strength;
-import Item.IConsumible;
+import Item.IConsumable;
 
-public class Character implements IDamageable, IConsumible{
+public class Character implements IDamageable{
     private String name;
 
     public String getName() {

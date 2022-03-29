@@ -1,9 +1,9 @@
 package Item.Potion;
 
-import Item.IConsumible;
+import Item.IConsumable;
 import Character.Character;
 
-public abstract class Potion implements IConsumible {
+public abstract class Potion implements IConsumable {
     private double power;
 
     @Override
